@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         if (v.getId() == R.id.btn_set_value){
             StringBuilder name = new StringBuilder();
-            for (int i = 0; i <= names.size(); i++){
+            for (int i = 0; i < names.size(); i++){
                 name.append(names.get(i)).append("\n");
             }
             tvText.setText(name.toString());
