@@ -37,6 +37,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 name.append(names.get(i)).append("\n");
             }
             tvText.setText(name.toString());
+
+            try {
+                Thread.sleep(3000000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
