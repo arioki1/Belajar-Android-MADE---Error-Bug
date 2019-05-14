@@ -6,10 +6,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Button btnSetValue;
     private TextView tvText;
+    private ArrayList<String> names;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,12 +22,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvText = findViewById(R.id.tv_text);
         btnSetValue = findViewById(R.id.btn_set_value);
         btnSetValue.setOnClickListener(this);
+
+        names = new ArrayList<>();
+        names.add("Narenda Wicaksono");
+        names.add("Kevin");
+        names.add("Yoza");
     }
 
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.btn_set_value){
-            tvText.setText("19");
+            StringBuilder name = new StringBuilder();
+            for (int i = 0; i <= names.size(); i++){
+                name.append(names.get(i)).append("\n");
+            }
+            tvText.setText(name.toString());
         }
     }
 }
