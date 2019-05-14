@@ -1,14 +1,15 @@
 package com.example.mytestingapp;
 
 import android.os.AsyncTask;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
@@ -29,12 +30,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnSetValue = findViewById(R.id.btn_set_value);
         btnSetValue.setOnClickListener(this);
 
+        imgPreview = findViewById(R.id.img_preview);
+
         names = new ArrayList<>();
         names.add("Narenda Wicaksono");
         names.add("Kevin");
         names.add("Yoza");
 
-        imgPreview.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.Fronalpstock_big));
+        Glide.with(this).load(R.drawable.fronalpstock_big).into(imgPreview);
     }
 
     @Override
