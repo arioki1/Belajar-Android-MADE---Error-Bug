@@ -1,7 +1,9 @@
 package com.example.mytestingapp;
 
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -13,6 +15,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btnSetValue;
     private TextView tvText;
     private ArrayList<String> names;
+    private DelayAsync delayAsync;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +41,43 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             tvText.setText(name.toString());
 
-            try {
+            delayAsync = new DelayAsync();
+            delayAsync.execute();
+        }
+    }
+
+    private static class DelayAsync extends AsyncTask<Void, Void, Void>{
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try{
                 Thread.sleep(3000000);
-            } catch (InterruptedException e) {
+            }catch (InterruptedException e){
                 e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            Log.d("DelayAsync", "Done");
+        }
+
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
+            Log.d("DelayAsync", "Cancelled");
+        }
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (delayAsync != null) {
+            if (delayAsync.getStatus().equals(AsyncTask.Status.RUNNING)) {
+                delayAsync.cancel(true);
             }
         }
     }
